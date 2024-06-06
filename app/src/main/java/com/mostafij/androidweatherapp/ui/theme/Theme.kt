@@ -53,6 +53,7 @@ fun AndroidWeatherAppTheme(
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
+    /*  // This removes the status bar controls from theme!
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
@@ -60,8 +61,8 @@ fun AndroidWeatherAppTheme(
             window.statusBarColor = colorScheme.primary.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
         }
-    }
-
+     }
+    */
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
