@@ -71,7 +71,11 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
+
+    implementation(libs.material3)
+    implementation(libs.androidx.material3.window.size)
+    implementation(libs.androidx.material3.adaptive.navigation.suite)
+
     // * -> To add the lifecycle tracking ability!
     implementation(libs.androidx.lifecycle.runtime.ktx)
     // * -> Packages that are used for testing!
