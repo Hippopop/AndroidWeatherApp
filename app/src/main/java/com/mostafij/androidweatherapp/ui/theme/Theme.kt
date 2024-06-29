@@ -7,9 +7,9 @@ import androidx.compose.runtime.Composable
 
 private val DarkColorScheme = darkColorScheme(
     primary = _primaryColor,
-    secondary = _backgroundColor,
     tertiary = _primaryAccent,
     background = _primaryColor,
+    secondary = _backgroundColor,
 )
 
 @Composable
@@ -18,20 +18,9 @@ fun AndroidWeatherAppTheme(
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
-
-    // -> Enables the Dynamic color scheme system.
-    //    val colorScheme = when {
-    //        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-    //            val context = LocalContext.current
-    //            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-    //        }
-    //
-    //        else -> DarkColorScheme
-    //    }
-
     MaterialTheme(
-        colorScheme = DarkColorScheme,
+        content = content,
         typography = Typography,
-        content = content
+        colorScheme = DarkColorScheme,
     )
 }
