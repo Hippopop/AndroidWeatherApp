@@ -4,12 +4,14 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 
 private val DarkColorScheme = darkColorScheme(
-    primary = _primaryColor,
-    tertiary = _primaryAccent,
-    background = _primaryColor,
-    secondary = _backgroundColor,
+    primary = primaryColor,
+    tertiary = primaryAccent,
+    background = primaryColor,
+    secondary = backgroundColor,
+    inversePrimary = textColor,
 )
 
 @Composable

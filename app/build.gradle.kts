@@ -80,6 +80,7 @@ dependencies {
 
     // * -> To add the lifecycle tracking ability!
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     // * -> Packages that are used for testing!
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -91,4 +92,7 @@ dependencies {
     // * -> Retrofit (for network handling!)
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
+    // * -> Coil (for network image!)
+    implementation(libs.coil.compose)
+
 }

@@ -11,7 +11,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelProvider
-import com.mostafij.androidweatherapp.ui.screen.Homepage
+import com.mostafij.androidweatherapp.ui.features.homepage.Homepage
 import com.mostafij.androidweatherapp.ui.theme.AndroidWeatherAppTheme
 import com.mostafij.androidweatherapp.ui.viewmodel.WeatherDataViewModel
 
@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
                 Color.parseColor("#801b1b1b"),
                 Color.parseColor("#801b1b1b"),
             ),
-        )
+        );
         super.onCreate(savedInstanceState)
         val viewModel: WeatherDataViewModel =
             ViewModelProvider(this)[WeatherDataViewModel::class.java]
@@ -30,7 +30,8 @@ class MainActivity : ComponentActivity() {
             AndroidWeatherAppTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background,
                 ) { Homepage(viewModel = viewModel) }
             }
         }
