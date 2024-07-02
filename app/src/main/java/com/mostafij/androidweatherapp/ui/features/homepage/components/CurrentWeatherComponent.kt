@@ -101,11 +101,13 @@ fun CurrentWeatherComponent(modifier: Modifier = Modifier) {
                 Text(
                     text = "Feels Like 25${StringConstants.CELSIUS}",
                     style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.padding(horizontal =  4.dp),
                 );
                 Text(".", color = MaterialTheme.colorScheme.inversePrimary);
                 Text(
                     text = "Sunset 10:00 AM",
                     style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.padding(horizontal =  4.dp),
                 );
             }
         }
