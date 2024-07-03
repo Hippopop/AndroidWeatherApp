@@ -1,10 +1,10 @@
 package com.mostafij.androidweatherapp.ui.features.homepage
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.LocationOn
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.Refresh
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -28,7 +28,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mostafij.androidweatherapp.ui.components.DrawerSection
 import com.mostafij.androidweatherapp.ui.features.homepage.components.CurrentWeatherComponent
 import com.mostafij.androidweatherapp.ui.features.homepage.components.WeatherForecastComponent
-import com.mostafij.androidweatherapp.ui.viewmodel.WeatherDataViewModel
+import com.mostafij.androidweatherapp.ui.features.homepage.viewmodel.WeatherDataViewModel
 import kotlinx.coroutines.launch
 
 
@@ -72,7 +72,7 @@ fun Homepage(modifier: Modifier = Modifier, viewModel: WeatherDataViewModel) {
                 IconButton(onClick = { /*TODO*/ }) {
                     Icon(
                         tint = Color.White,
-                        imageVector = Icons.Rounded.Refresh,
+                        imageVector = Icons.Rounded.LocationOn,
                         contentDescription = "Search Button",
                     )
                 }

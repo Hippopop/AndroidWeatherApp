@@ -1,4 +1,4 @@
-package com.mostafij.androidweatherapp.ui.viewmodel
+package com.mostafij.androidweatherapp.ui.features.homepage.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

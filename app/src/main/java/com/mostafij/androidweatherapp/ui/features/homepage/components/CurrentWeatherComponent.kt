@@ -95,17 +95,19 @@ fun CurrentWeatherComponent(modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(IntrinsicSize.Min)
-                    .padding(horizontal = 20.dp, vertical = 10.dp)
+                    .padding(horizontal = 28.dp, vertical = 10.dp)
                     .padding(bottom = 16.dp),
             ) {
                 Text(
                     text = "Feels Like 25${StringConstants.CELSIUS}",
                     style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.padding(horizontal =  4.dp),
                 );
                 Text(".", color = MaterialTheme.colorScheme.inversePrimary);
                 Text(
                     text = "Sunset 10:00 AM",
                     style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.padding(horizontal =  4.dp),
                 );
             }
         }
