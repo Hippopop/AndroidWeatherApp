@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelProvider
 import com.mostafij.androidweatherapp.ui.features.homepage.Homepage
 import com.mostafij.androidweatherapp.ui.theme.AndroidWeatherAppTheme
-import com.mostafij.androidweatherapp.ui.viewmodel.WeatherDataViewModel
+import com.mostafij.androidweatherapp.ui.features.homepage.viewmodel.WeatherDataViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

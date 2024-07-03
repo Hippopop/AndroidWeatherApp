@@ -4,16 +4,18 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -27,7 +29,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.mostafij.androidweatherapp.R
-import com.mostafij.androidweatherapp.constants.StringConstants
 
 
 @Composable
@@ -44,7 +45,7 @@ fun WeatherForecastComponent(modifier: Modifier = Modifier) {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceAround,
                 modifier = Modifier
-                    .padding(horizontal = 24.dp)
+                    .padding(horizontal = 32.dp, vertical = 8.dp)
                     .fillMaxWidth(),
             ) {
                 TodayTomorrowButton(
@@ -63,11 +64,15 @@ fun WeatherForecastComponent(modifier: Modifier = Modifier) {
                 );
                 Row(verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.clickable { }) {
-                    Text(text = "Next 7 days", color = Color.Blue);
+                    Text(
+                        text = "Next 7 days",
+                        color = MaterialTheme.colorScheme.primaryContainer,
+                        style = MaterialTheme.typography.titleLarge,
+                    );
                     Icon(
                         painter = painterResource(id = R.drawable.arrowhead_right),
                         contentDescription = "Search Button",
-                        tint = Color.Blue,
+                        tint = MaterialTheme.colorScheme.primaryContainer,
                         modifier = Modifier
                             .size(20.dp)
                             .padding(start = 3.dp)
@@ -76,107 +81,96 @@ fun WeatherForecastComponent(modifier: Modifier = Modifier) {
                 }
             }
             LazyRow(
+                contentPadding = PaddingValues(horizontal = 6.dp),
                 modifier = Modifier
-                    .weight(1f)
+                    .weight(55f)
                     .fillMaxHeight()
-                    .padding(top= 8.dp)
+                    .padding(top = 8.dp, bottom = 8.dp)
                     .padding(vertical = 10.dp),
             ) {
                 items(10) {
                     HourlyForecastComponent(isDark = (it.mod(2) == 0))
                 }
             }
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
+            ChanceOfRainComponent(modifier = Modifier.weight(45f));
+        }
+    }
+}
+
+
+@Composable
+fun ChanceOfRainComponent(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(top = 10.dp)
+            .padding(horizontal = 24.dp),
+    ) {
+        Text(
+            text = "Chance of Rain",
+            color = MaterialTheme.colorScheme.inversePrimary,
+            style = MaterialTheme.typography.titleLarge,
+            modifier = Modifier.padding(bottom = 8.dp),
+        );
+        Row(modifier = Modifier.weight(1f).padding(bottom = 8.dp)) {
+            Column(Modifier.padding(end = 3.dp, bottom = 14.dp)) {
+                val days = listOf("Sunny", "Rainy", "Heavy Rain");
+                days.forEach {
+                    Box(Modifier.weight(1f)) {
+                        Text(
+                            text = it,
+                            modifier = Modifier.align(Alignment.Center),
+                        )
+                    };
+                }
+            };
+            LazyRow(
+                Modifier
                     .weight(1f)
-                    .fillMaxSize()
-                    .padding(horizontal = 24.dp),
+                    .padding(horizontal = 4.dp),
+                contentPadding = PaddingValues(4.dp),
             ) {
-                Text(
-                    text = "Weather Forecast Section",
-                    color = MaterialTheme.colorScheme.inversePrimary,
-                )
+                items(10) {
+                    HourlyRainMeterComponent(
+                        rainPercentage = (it * 10).toFloat()
+                    )
+                }
             }
         }
     }
 }
 
+
 @Composable
-fun HourlyForecastComponent(modifier: Modifier = Modifier, isDark: Boolean) {
-    Box(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(4.dp)
-            .padding(top = if (isDark) 0.dp else 16.dp, bottom = if (isDark) 16.dp else 0.dp)
-            .background(color = Color.White.copy(alpha = .9f), shape = RoundedCornerShape(100.dp))
+fun HourlyRainMeterComponent(modifier: Modifier = Modifier, rainPercentage: Float) {
+    Column(
+        modifier.padding(horizontal = 4.dp), horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column(modifier = Modifier
-            .padding(8.dp)
-            .width(72.dp)) {
-            Box(
-                Modifier
-                    .weight(1f)
-                    .fillMaxSize()) {
-                Text(
-                    text = "0.0${StringConstants.CELSIUS}",
-                    color = Color.Black,
-                    modifier = Modifier.align(Alignment.Center),
-                )
-            };
-            Box(
-                Modifier
-                    .weight(1f)
-                    .fillMaxSize().background(color = Color.Blue.copy(alpha = .5f), shape = CircleShape,)) {
-                Text(
-                    text = "0.0${StringConstants.CELSIUS}",
-                    color = Color.Black,
-                    modifier = Modifier.align(Alignment.Center).padding(4.dp),
-                )
-            };
-            Box(
-                Modifier
-                    .weight(1f)
-                    .fillMaxSize()) {
-                Text(
-                    text = "0.0${StringConstants.CELSIUS}",
-                    color = Color.Black,
-                    modifier = Modifier.align(Alignment.Center),
-                )
-            };
-        }
-    }
-}
-
-
-enum class ForecastDay {
-    TODAY, TOMORROW
-}
-
-@Composable
-fun TodayTomorrowButton(
-    modifier: Modifier = Modifier,
-    selected: ForecastDay,
-    forecastDay: ForecastDay,
-    onSelect: (it: ForecastDay) -> Unit,
-) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = modifier) {
-        Text(
-            text = forecastDay.name.lowercase().replaceFirstChar { it.uppercase() },
+        BoxWithConstraints(
             modifier = Modifier
-                .padding(horizontal = 8.dp, vertical = 4.dp)
-                .clickable { onSelect(forecastDay) },
-        );
-        if (selected == forecastDay) {
+                .weight(1f)
+                .width(8.dp)
+                .padding(vertical = 4.dp)
+                .background(
+                    color = MaterialTheme.colorScheme.secondary.copy(alpha = .30f),
+                    shape = RoundedCornerShape(8.dp),
+                ),
+        ) {
             Box(
                 modifier = Modifier
-                    .size(5.dp)
+                    .width(8.dp)
+                    .height((constraints.maxHeight * rainPercentage).dp)
+                    .align(Alignment.BottomCenter)
                     .background(
-                        shape = CircleShape,
-                        color = Color.White,
+                        color = Color.Yellow,
+                        shape = RoundedCornerShape(8.dp),
                     ),
-            )
+            ) {
+
+            }
         }
+        Text(text = "${3 + 1} AM");
     }
 }
+
+

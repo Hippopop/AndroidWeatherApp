@@ -95,7 +95,7 @@ fun CurrentWeatherComponent(modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(IntrinsicSize.Min)
-                    .padding(horizontal = 20.dp, vertical = 10.dp)
+                    .padding(horizontal = 28.dp, vertical = 10.dp)
                     .padding(bottom = 16.dp),
             ) {
                 Text(
