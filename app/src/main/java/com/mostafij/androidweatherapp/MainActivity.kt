@@ -1,19 +1,25 @@
 package com.mostafij.androidweatherapp
 
+import android.app.Application
 import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.ui.Modifier
-import androidx.lifecycle.ViewModelProvider
-import com.mostafij.androidweatherapp.ui.features.homepage.Homepage
-import com.mostafij.androidweatherapp.ui.theme.AndroidWeatherAppTheme
-import com.mostafij.androidweatherapp.ui.features.homepage.viewmodel.WeatherDataViewModel
+import com.mostafij.androidweatherapp.data.AppContainer
+import com.mostafij.androidweatherapp.data.AppContainerImpl
+
+
+class MyApplication : Application() {
+    lateinit var container: AppContainer
+
+    override fun onCreate() {
+        super.onCreate()
+        container = AppContainerImpl(this)
+    }
+}
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,17 +30,11 @@ class MainActivity : ComponentActivity() {
             ),
         );
         super.onCreate(savedInstanceState)
-        val viewModel: WeatherDataViewModel =
-            ViewModelProvider(this)[WeatherDataViewModel::class.java]
-        setContent {
-            AndroidWeatherAppTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background,
-                ) { Homepage(viewModel = viewModel) }
-            }
-        }
+
+        val appContainer: AppContainer = (application as MyApplication).container;
+        setContent { AndroidWeatherApp(appContainer) }
     }
 }
+
+
 

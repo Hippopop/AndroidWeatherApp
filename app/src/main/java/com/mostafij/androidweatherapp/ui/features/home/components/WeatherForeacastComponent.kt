@@ -1,4 +1,4 @@
-package com.mostafij.androidweatherapp.ui.features.homepage.components
+package com.mostafij.androidweatherapp.ui.features.home.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -32,7 +32,7 @@ import com.mostafij.androidweatherapp.R
 
 
 @Composable
-fun WeatherForecastComponent(modifier: Modifier = Modifier) {
+fun WeatherForecastComponent(modifier: Modifier = Modifier, navigateToForecastDay: () -> Unit) {
     val selectedForecastDay = remember { mutableStateOf(ForecastDay.TODAY) };
 
     Box(
@@ -63,7 +63,7 @@ fun WeatherForecastComponent(modifier: Modifier = Modifier) {
                     },
                 );
                 Row(verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.clickable { }) {
+                    modifier = Modifier.clickable { navigateToForecastDay() }) {
                     Text(
                         text = "Next 7 days",
                         color = MaterialTheme.colorScheme.primaryContainer,
@@ -112,7 +112,9 @@ fun ChanceOfRainComponent(modifier: Modifier = Modifier) {
             style = MaterialTheme.typography.titleLarge,
             modifier = Modifier.padding(bottom = 8.dp),
         );
-        Row(modifier = Modifier.weight(1f).padding(bottom = 8.dp)) {
+        Row(modifier = Modifier
+            .weight(1f)
+            .padding(bottom = 8.dp)) {
             Column(Modifier.padding(end = 3.dp, bottom = 14.dp)) {
                 val days = listOf("Sunny", "Rainy", "Heavy Rain");
                 days.forEach {

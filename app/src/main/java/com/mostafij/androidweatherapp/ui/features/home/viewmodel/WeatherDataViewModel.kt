@@ -1,14 +1,14 @@
-package com.mostafij.androidweatherapp.ui.features.homepage.viewmodel
+package com.mostafij.androidweatherapp.ui.features.home.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.mostafij.androidweatherapp.data.network.CurrentWeatherRepoProvider
 import com.mostafij.androidweatherapp.data.network.CurrentWeatherRepository
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
 
-class WeatherDataViewModel : ViewModel() {
+class WeatherDataViewModel(private val currentWeatherRepository: CurrentWeatherRepository) :
+    ViewModel() {
     val weatherRepo: CurrentWeatherRepository = CurrentWeatherRepoProvider.currentWeatherRepository;
 
     fun getWeatherData(city: String) {
@@ -22,4 +22,15 @@ class WeatherDataViewModel : ViewModel() {
 
         }
     };
+
+    companion object {
+        fun provideFactory(
+            currentWeatherRepository: CurrentWeatherRepository,
+        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                @Suppress("UNCHECKED_CAST")
+                return WeatherDataViewModel(currentWeatherRepository) as T;
+            }
+        }
+    }
 }

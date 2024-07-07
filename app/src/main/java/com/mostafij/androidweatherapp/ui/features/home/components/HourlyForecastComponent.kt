@@ -1,6 +1,5 @@
-package com.mostafij.androidweatherapp.ui.features.homepage.components
+package com.mostafij.androidweatherapp.ui.features.home.components
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box

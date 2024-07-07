@@ -1,4 +1,4 @@
-package com.mostafij.androidweatherapp.ui.features.homepage.components
+package com.mostafij.androidweatherapp.ui.features.home.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

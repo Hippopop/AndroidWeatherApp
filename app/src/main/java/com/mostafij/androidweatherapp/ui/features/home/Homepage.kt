@@ -1,4 +1,4 @@
-package com.mostafij.androidweatherapp.ui.features.homepage
+package com.mostafij.androidweatherapp.ui.features.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.LocationOn
 import androidx.compose.material.icons.rounded.Menu
-import androidx.compose.material.icons.rounded.Refresh
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -23,26 +22,20 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mostafij.androidweatherapp.ui.components.DrawerSection
-import com.mostafij.androidweatherapp.ui.features.homepage.components.CurrentWeatherComponent
-import com.mostafij.androidweatherapp.ui.features.homepage.components.WeatherForecastComponent
-import com.mostafij.androidweatherapp.ui.features.homepage.viewmodel.WeatherDataViewModel
+import com.mostafij.androidweatherapp.ui.features.home.components.CurrentWeatherComponent
+import com.mostafij.androidweatherapp.ui.features.home.components.WeatherForecastComponent
+import com.mostafij.androidweatherapp.ui.features.home.viewmodel.WeatherDataViewModel
 import kotlinx.coroutines.launch
-
-
-@Preview
-@Composable
-fun HomepagePrev() {
-    val viewModel: WeatherDataViewModel = viewModel()
-    Homepage(viewModel = viewModel)
-}
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Homepage(modifier: Modifier = Modifier, viewModel: WeatherDataViewModel) {
+fun Homepage(
+    modifier: Modifier = Modifier,
+    viewModel: WeatherDataViewModel,
+    goToForecastScreen: () -> Unit
+) {
     val coroutineScope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
 
@@ -90,7 +83,7 @@ fun Homepage(modifier: Modifier = Modifier, viewModel: WeatherDataViewModel) {
                     .padding(paddingValues),
             ) {
                 CurrentWeatherComponent(Modifier.weight(4f))
-                WeatherForecastComponent(Modifier.weight(6f))
+                WeatherForecastComponent(Modifier.weight(6f), navigateToForecastDay = goToForecastScreen)
             }
         }
     }

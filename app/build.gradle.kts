@@ -26,8 +26,7 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
@@ -81,6 +80,7 @@ dependencies {
     // * -> To add the lifecycle tracking ability!
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+
     // * -> Packages that are used for testing!
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -89,10 +89,15 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
     // * -> Retrofit (for network handling!)
-    implementation (libs.retrofit)
-    implementation (libs.converter.gson)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
     // * -> Coil (for network image!)
     implementation(libs.coil.compose)
-
+    
+    // * -> To add the lifecycle tracking ability!
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.navigation.runtime.ktx)
 }
