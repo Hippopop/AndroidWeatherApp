@@ -1,5 +1,7 @@
 package com.mostafij.androidweatherapp.constants
 
+import com.mostafij.androidweatherapp.BuildConfig
+
 object AppConstants {
-    const val API_KEY = "f7a85ab839534694a94200051240107";
+    const val API_KEY = BuildConfig.API_KEY;
 }

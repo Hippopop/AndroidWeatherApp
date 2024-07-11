@@ -2,6 +2,7 @@ package com.mostafij.androidweatherapp.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+val errorColor = Color.Red
 val textColor = Color.White
 val mildTextColor = Color(0xB3FFFFFF)
 val primaryColor = Color(0xff12123C)

@@ -1,16 +1,15 @@
 package com.mostafij.androidweatherapp.data
 
 import android.content.Context
-import com.mostafij.androidweatherapp.data.network.CurrentWeatherRepoProvider
-import com.mostafij.androidweatherapp.data.network.CurrentWeatherRepository
+import com.mostafij.androidweatherapp.data.repository.current.impl.CurrentWeatherRepoProvider
 
 
 interface AppContainer {
-    val currentWeatherRepository: CurrentWeatherRepository
+    val currentWeatherRepository: CurrentWeatherRepoProvider
 }
 
 class AppContainerImpl(private val applicationContext: Context) : AppContainer {
-    override val currentWeatherRepository: CurrentWeatherRepository by lazy {
-        CurrentWeatherRepoProvider.currentWeatherRepository
+    override val currentWeatherRepository: CurrentWeatherRepoProvider by lazy {
+        CurrentWeatherRepoProvider()
     }
 }

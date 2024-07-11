@@ -24,8 +24,10 @@ fun AppNavigationGraph(
         composable(ApplicationDestinations.HOME_ROUTE) {
             val weatherDataViewModel: WeatherDataViewModel =
                 viewModel(factory = WeatherDataViewModel.provideFactory(appContainer.currentWeatherRepository));
+//            val stateFlow =  weatherDataViewModel.homePageState.collectAsStateWithLifecycle();
             Homepage(
-                viewModel = weatherDataViewModel,
+                homePageState = weatherDataViewModel.homePageState,
+                onDayChange = { weatherDataViewModel.onSelectedDayChange(it) },
                 goToForecastScreen = appNavigationController.navigateToWeeklyForecast,
             );
         }

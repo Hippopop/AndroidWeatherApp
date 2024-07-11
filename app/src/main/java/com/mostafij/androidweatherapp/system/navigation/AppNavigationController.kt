@@ -15,9 +15,8 @@ class AppNavigationController(navController: NavHostController) {
     val navigateToHome: () -> Unit = {
         navController.navigate(ApplicationDestinations.HOME_ROUTE) {}
     }
+
     val navigateToWeeklyForecast: () -> Unit = {
-        navController.navigate(ApplicationDestinations.FORECAST_ROUTE){
-            ;
-        };
+        navController.navigate(ApplicationDestinations.FORECAST_ROUTE){};
     }
 }

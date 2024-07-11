@@ -1,5 +1,8 @@
 package com.mostafij.androidweatherapp.ui.features.home.components
 
+import android.icu.text.SimpleDateFormat
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -23,11 +26,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.mostafij.androidweatherapp.constants.StringConstants
+import com.mostafij.androidweatherapp.data.model.CurrentWeatherData
+import com.mostafij.androidweatherapp.data.model.LocationData
 import com.mostafij.androidweatherapp.ui.components.AutoResizedText
+import java.util.Date
+import java.util.Locale
 
 
 @Composable
-fun CurrentWeatherComponent(modifier: Modifier = Modifier) {
+fun CurrentWeatherComponent(
+    currentWeatherData: CurrentWeatherData?,
+    locationData: LocationData?,
+    modifier: Modifier = Modifier,
+) {
     Box(
         modifier
             .fillMaxSize()
@@ -46,7 +57,8 @@ fun CurrentWeatherComponent(modifier: Modifier = Modifier) {
                     .padding(top = 12.dp),
             ) {
                 AsyncImage(
-                    model = "https://img.icons8.com/?size=48&id=sS05BACA8dfZ&format=png",
+                    model = "https:" + (currentWeatherData?.conditionData?.icon
+                        ?: "//img.icons8.com/?size=48&id=sS05BACA8dfZ&format=png"),
                     contentDescription = "Translated description of what the image contains",
                     modifier = Modifier
                         .padding(horizontal = 16.dp)
@@ -60,10 +72,11 @@ fun CurrentWeatherComponent(modifier: Modifier = Modifier) {
                         color = MaterialTheme.colorScheme.inversePrimary,
                     );
                     Text(
-                        text = "Sun, 30 Jun",
+                        text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) getDateString() else "Thu, 11 Jul 2024",
                         style = MaterialTheme.typography.bodyLarge,
                         modifier = Modifier.padding(3.dp),
-                    );
+                    )
+                    ;
                 }
             }
             Box(
@@ -74,7 +87,7 @@ fun CurrentWeatherComponent(modifier: Modifier = Modifier) {
 
             ) {
                 AutoResizedText(
-                    text = "23${StringConstants.CELSIUS}",
+                    text = "${currentWeatherData?.tempC ?: "??"}${StringConstants.CELSIUS}",
                     color = MaterialTheme.colorScheme.inversePrimary,
                     style = TextStyle(fontSize = 500.sp, textAlign = TextAlign.Center),
                     modifier = Modifier
@@ -83,7 +96,7 @@ fun CurrentWeatherComponent(modifier: Modifier = Modifier) {
                 )
             };
             Text(
-                text = "Pahartali, Chittagong.",
+                text = "${locationData?.name ?: "Current city"}, ${locationData?.region ?: "Region"}",
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier
                     .padding(vertical = 8.dp)
@@ -99,18 +112,24 @@ fun CurrentWeatherComponent(modifier: Modifier = Modifier) {
                     .padding(bottom = 16.dp),
             ) {
                 Text(
-                    text = "Feels Like 25${StringConstants.CELSIUS}",
+                    text = "Feels Like ${currentWeatherData?.feelslikeC ?: "??"}${StringConstants.CELSIUS}",
                     style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.padding(horizontal =  4.dp),
+                    modifier = Modifier.padding(horizontal = 4.dp),
                 );
                 Text(".", color = MaterialTheme.colorScheme.inversePrimary);
                 Text(
-                    text = "Sunset 10:00 AM",
+                    text = "Humidity  ${currentWeatherData?.humidity ?: "??"}",
                     style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.padding(horizontal =  4.dp),
+                    modifier = Modifier.padding(horizontal = 4.dp),
                 );
             }
         }
 
     }
+}
+
+@RequiresApi(Build.VERSION_CODES.N)
+fun getDateString(format: SimpleDateFormat? = null): String {
+    val formatter = format ?: SimpleDateFormat("EEE, d MMM yyyy", Locale.getDefault());
+    return formatter.format(Date());
 }

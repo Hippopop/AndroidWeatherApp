@@ -21,20 +21,22 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.mostafij.androidweatherapp.R
+import com.mostafij.androidweatherapp.ui.features.home.viewmodel.ForecastDay
 
 
 @Composable
-fun WeatherForecastComponent(modifier: Modifier = Modifier, navigateToForecastDay: () -> Unit) {
-    val selectedForecastDay = remember { mutableStateOf(ForecastDay.TODAY) };
-
+fun WeatherForecastComponent(
+    modifier: Modifier = Modifier,
+    currentDay: ForecastDay,
+    navigateToForecastDay: () -> Unit,
+    onDayChange: (ForecastDay) -> Unit,
+) {
     Box(
         modifier
             .fillMaxSize()
@@ -49,18 +51,14 @@ fun WeatherForecastComponent(modifier: Modifier = Modifier, navigateToForecastDa
                     .fillMaxWidth(),
             ) {
                 TodayTomorrowButton(
-                    selected = selectedForecastDay.value,
+                    selected = currentDay,
                     forecastDay = ForecastDay.TODAY,
-                    onSelect = {
-                        selectedForecastDay.value = it
-                    },
+                    onSelect = onDayChange,
                 );
                 TodayTomorrowButton(
-                    selected = selectedForecastDay.value,
+                    selected = currentDay,
                     forecastDay = ForecastDay.TOMORROW,
-                    onSelect = {
-                        selectedForecastDay.value = it
-                    },
+                    onSelect = onDayChange,
                 );
                 Row(verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.clickable { navigateToForecastDay() }) {
@@ -112,9 +110,11 @@ fun ChanceOfRainComponent(modifier: Modifier = Modifier) {
             style = MaterialTheme.typography.titleLarge,
             modifier = Modifier.padding(bottom = 8.dp),
         );
-        Row(modifier = Modifier
-            .weight(1f)
-            .padding(bottom = 8.dp)) {
+        Row(
+            modifier = Modifier
+                .weight(1f)
+                .padding(bottom = 8.dp)
+        ) {
             Column(Modifier.padding(end = 3.dp, bottom = 14.dp)) {
                 val days = listOf("Sunny", "Rainy", "Heavy Rain");
                 days.forEach {

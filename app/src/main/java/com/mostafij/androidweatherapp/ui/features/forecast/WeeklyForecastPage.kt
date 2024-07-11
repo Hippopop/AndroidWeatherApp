@@ -17,7 +17,9 @@ import androidx.compose.ui.graphics.Color
 import com.mostafij.androidweatherapp.system.navigation.AppNavigationController
 
 @Composable
-fun WeeklyForecastPage(modifier: Modifier = Modifier, appNavigationController: AppNavigationController) {
+fun WeeklyForecastPage(
+    modifier: Modifier = Modifier, appNavigationController: AppNavigationController
+) {
     Scaffold {
         Column(
             verticalArrangement = Arrangement.Center,
@@ -27,7 +29,7 @@ fun WeeklyForecastPage(modifier: Modifier = Modifier, appNavigationController: A
                 .fillMaxSize()
         ) {
             Text(text = "Weekly Forecast Screen!");
-            IconButton(onClick = { appNavigationController.back() }) {
+            IconButton(onClick = { appNavigationController.navigateToHome() }) {
                 Icon(
                     tint = Color.White,
                     contentDescription = "Back Button",

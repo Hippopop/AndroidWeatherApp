@@ -14,11 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.mostafij.androidweatherapp.ui.features.home.viewmodel.ForecastDay
 
-
-enum class ForecastDay {
-    TODAY, TOMORROW
-}
 
 @Composable
 fun TodayTomorrowButton(

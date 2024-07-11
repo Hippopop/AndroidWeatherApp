@@ -1,9 +1,16 @@
 plugins {
     alias(libs.plugins.androidApplication)
-
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
+
+secrets {
+    // A properties file containing default secret values. This file can be
+    // checked in version control.
+    defaultPropertiesFileName = "local.defaults.properties"
+}
+
 
 android {
     namespace = "com.mostafij.androidweatherapp"
@@ -11,6 +18,7 @@ android {
 
     defaultConfig {
         applicationId = "com.mostafij.androidweatherapp"
+
         minSdk = 23
         targetSdk = 34
         versionCode = 1
@@ -39,6 +47,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
